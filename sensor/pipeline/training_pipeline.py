@@ -89,6 +89,7 @@ class TrainPipeline:
         try:
             aws_buket_url = f"s3://pranay-scania-sensor/artifact/{self.training_pipeline_config.timestamp}"
             self.s3_sync.sync_folder_to_s3(folder = self.training_pipeline_config.artifact_dir,aws_buket_url=aws_buket_url)
+            logging.info("saved model to s3")
         except Exception as e:
             raise SensorException(e,sys)
             
