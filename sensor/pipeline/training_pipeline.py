@@ -87,7 +87,7 @@ class TrainPipeline:
 
     def sync_artifact_dir_to_s3(self):
         try:
-            aws_buket_url = f"s3://pranay-scania-sensor/artifact/{self.training_pipeline_config.timestamp}"
+            aws_buket_url = f"s3://{TRAINING_BUCKET_NAME}/artifact/{self.training_pipeline_config.timestamp}"
             self.s3_sync.sync_folder_to_s3(folder = self.training_pipeline_config.artifact_dir,aws_buket_url=aws_buket_url)
             logging.info("saved model to s3")
         except Exception as e:
@@ -95,7 +95,7 @@ class TrainPipeline:
             
     def sync_saved_model_dir_to_s3(self):
         try:
-            aws_buket_url = f"s3://pranay-scania-sensor/{SAVED_MODEL_DIR}"
+            aws_buket_url = f"s3://{TRAINING_BUCKET_NAME}/{SAVED_MODEL_DIR}"
             self.s3_sync.sync_folder_to_s3(folder = SAVED_MODEL_DIR,aws_buket_url=aws_buket_url)
         except Exception as e:
             raise SensorException(e,sys)
